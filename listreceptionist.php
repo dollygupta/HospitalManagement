@@ -8,7 +8,7 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="listreceptionist.php">Receptionist List</a></li>
-                    <li><a href="#">Add Receptionist</a></li>
+                    <li><a href="addreceptionist.php">Add Receptionist</a></li>
                 </ul>
             </div>
         </div>
@@ -51,8 +51,6 @@ here;
 try
 {
     $header=true;
-
-    print "<h2>List of all Receptionists</h2>\n";
 
     // Connect to the database.
     include('connection.php');

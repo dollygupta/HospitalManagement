@@ -8,7 +8,7 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="listpatient.php">Patient List</a></li>
-                    <li><a href="#">Add Patient</a></li>
+                    <li><a href="addpatient.php">Add Patient</a></li>
                 </ul>
             </div>
         </div>
@@ -73,8 +73,6 @@ here;
 try
 {
     $header=true;
-
-    print "<h2>List of all Patients</h2>\n";
 
     // Connect to the database.
     include('connection.php');

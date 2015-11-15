@@ -16,7 +16,7 @@ body{
 }
 
 .form-horizontal{
-	background-color: #CCCCCC;
+	/*background-color: #CCCCCC;*/
 	padding: 3% 10% 10%;
 }
 .form-control{
