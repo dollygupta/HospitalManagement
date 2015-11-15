@@ -1,50 +1,52 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>List all Nurses</title>
-</head>
-
-<body>
-<?php
+<?include('adminCommon.html');?>
+<div class="content">
+    <div class="page-header">
+        <h2>Manage Nurse</h2>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="listnurse.php">Nurse List</a></li>
+                    <li><a href="#">Add Nurse</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="show-table">
+        <?php
 ini_set('display_errors', 1);
 
 include('classemployee.php');
 
-function createtablerow(employee $e,& $header)
-{
-    if($header)
-    {
-        print "<table border ='1'>";
-        print "<col width='150'>";
-        print "<col width='250'>";
-        print "<col width='150'>";
-        print "<col width='300'>";
-        print "<col width='150'>";
-        print "<col width='150'>";
-        print <<<here
+        function createtablerow(employee $e,& $header)
+        {
+            if($header)
+            {
+                print "<table class='table table-bordered'>";
+                print <<<here
     <tr>
-    <th>Employee ID</th>
-    <th>Address</th>
-    <th>Employee Name</th>
-    <th>Email</th>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Street Address</th>
+    <th>Email Address</th>
     <th>Salary</th>
-    <th>Employee Type</th>
+    <th>Options</th>
     </tr>
 here;
-        $header=false;
-    }
-    print "<tr>";
-    print "<td>". $e->gete_id()    . "</td>";
-    print "<td>". $e->getaddress() . "</td>";
-    print "<td>". $e->gete_name()  . "</td>";
-    print "<td>". $e->getemail()   . "</td>";
-    print "<td>". $e->getsalary()  . "</td>";
-    print "<td>". $e->gete_type()  . "</td>";
+                $header=false;
+            }
+            $eid=$e->gete_id();
+            print "<tr>";
+            print "<td>". $e->gete_id()    . "</td>";
+            print "<td>". $e->gete_name()  . "</td>";
+            print "<td>". $e->getaddress() . "</td>";
+            print "<td>". $e->getemail()   . "</td>";
+            print "<td>". $e->getsalary()  . "</td>";
+            print "<td>&emsp;<a href=updatenurse.php?eid=$eid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletenurse.php?eid=$eid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+            print "</tr>";
 
-    print "</tr>";
-
-}
+        }
 
 try
 {
@@ -92,5 +94,6 @@ catch(Exception $ex) {
  * Time: 6:15 PM
  */
 ?>
-</body>
-</html>
+    </div>
+</div>
+<?include('footer.html');?>

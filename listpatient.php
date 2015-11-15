@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>List all Patients</title>
-</head>
-
-<body>
-<?php
+<?include('adminCommon.html');?>
+<div class="content">
+    <div class="page-header">
+        <h2>Manage Patient</h2>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="listpatient.php">Patient List</a></li>
+                    <li><a href="#">Add Patient</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="show-table">
+        <?php
 ini_set('display_errors', 1);
 
 class patient
@@ -33,35 +41,31 @@ function createtablerow(patient $p,& $header)
 {
     if($header)
     {
-        print "<table border ='1'>";
-        print "<col width='150'>";
-        print "<col width='150'>";
-        print "<col width='300'>";
-        print "<col width='250'>";
-        print "<col width='150'>";
-        print "<col width='150'>";
-        print "<col width='150'>";
+        print "<table class='table table-bordered'>";
         print <<<here
     <tr>
-    <th>Patient ID</th>
+    <th>ID</th>
     <th>Name</th>
-    <th>Email</th>
-    <th>Address</th>
+    <th>Street Address</th>
+    <th>Email Address</th>
     <th>Gender</th>
     <th>Date of Birth</th>
     <th>Weight</th>
+    <th>Options</th>
     </tr>
 here;
         $header=false;
     }
+    $pid=$p->getid();
     print "<tr>";
     print "<td>". $p->getid()      . "</td>";
     print "<td>". $p->getname()    . "</td>";
-    print "<td>". $p->getemail()   . "</td>";
     print "<td>". $p->getaddress() . "</td>";
+    print "<td>". $p->getemail()   . "</td>";
     print "<td>". $p->getgender()  . "</td>";
     print "<td>". $p->getdob()     . "</td>";
     print "<td>". $p->getweight()  . "</td>";
+    print "<td>&emsp;<a href=updatepatient.php?eid=$pid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepatient.php?eid=$pid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
     print "</tr>";
 
 }
@@ -112,5 +116,6 @@ catch(Exception $ex) {
  * Time: 1:07 AM
  */
 ?>
-</body>
-</html>
+    </div>
+</div>
+<?include('footer.html');?>
