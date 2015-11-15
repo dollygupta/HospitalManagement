@@ -25,8 +25,7 @@ try
     }
 
     // Connect to the database.
-    $con = new PDO("mysql:host=localhost;dbname=hos_m","root", "");
-    $con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    include('connection.php');
 
     $query = "INSERT INTO patient (p_name, p_email, p_address, p_gender, p_dob, p_weight, p_id, p_password)
               VALUES (:name, :email, :address, :gender, :dob, :weight, :id, :password)";

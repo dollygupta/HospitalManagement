@@ -73,8 +73,7 @@ try
     print "<h2>List of all Patients</h2>\n";
 
     // Connect to the database.
-    $con = new PDO("mysql:host=localhost;dbname=hos_m","root", "");
-    $con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    include('connection.php');
 
     $query = "SELECT * FROM patient;";
 
