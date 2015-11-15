@@ -1,7 +1,49 @@
 <html>
-<head><title>Hospital Management System</title></head>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="to_homepage.js"></script>
+    
+  <link rel="stylesheet" href='style.css'>
+    <title>Hospital Management System</title>
+</head>
 <body>
-Hello Meera and Dolly
-<p>Testing...Madhav was here</p>
+<div class="header"> 
+    <div class="container">
+        <div class="logo">
+        <h1> Hospital Management System</h1>
+    </div>
+    </div>
+ </div>
+<br><br><br><br><br>
+<div class="container">
+  <div class="row">
+  <div class="col-md-6">
+  	<img src="" width=200px height=200px>
+  </div>
+  <div class="col-md-6">
+  	<div class="login">
+  			<h4>Login</h4>
+  		</div>
+  	<form class="form-horizontal" action="homepage.php" method="get">
+      
+  			<input type="text" class="form-control" id="user_type" name="user_type" placeholder="User type" required>
+
+			<input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+				   
+			<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password" required>
+			<input type="button" value="Redirect Me" onclick="goTohomepage()" />   
+  
+			<button type="submit" class="btn btn-primary userType">Submit</button>
+		     			
+</form>
+<p id="error">
+</p>
+  </div>
+</div>
+</div>
+</div>
+
 </body>
 </html>
