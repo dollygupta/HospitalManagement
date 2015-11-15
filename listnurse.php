@@ -9,35 +9,19 @@
 <?php
 ini_set('display_errors', 1);
 
-class employee
-{
-    private $EID;
-    private $Address;
-    private $Name;
-    private $Email;
-    private $Salary;
-    private $type;
-
-
-    public function gete_id() {return $this->EID; }
-    public function getaddress() {return $this->Address; }
-    public function gete_name() {return $this->Name; }
-    public function getemail() {return $this->Email; }
-    public function getsalary() {return $this->Salary; }
-    public function gete_type() {return $this->type;}
-}
+include('classemployee.php');
 
 function createtablerow(employee $e,& $header)
 {
     if($header)
     {
-    print "<table border ='1'>";
-    print "<col width='150'>";
-    print "<col width='250'>";
-    print "<col width='150'>";
-    print "<col width='300'>";
-    print "<col width='150'>";
-    print "<col width='150'>";
+        print "<table border ='1'>";
+        print "<col width='150'>";
+        print "<col width='250'>";
+        print "<col width='150'>";
+        print "<col width='300'>";
+        print "<col width='150'>";
+        print "<col width='150'>";
         print <<<here
     <tr>
     <th>Employee ID</th>
