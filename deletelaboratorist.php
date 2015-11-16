@@ -19,24 +19,35 @@ ini_set('display_errors', 1);
 
 $eid = filter_input(INPUT_GET, "eid");
 
-try {
+if(isset($_POST['buttondec'])) {
 
-    // Connect to the database.
-    include('connection.php');
+    $decision=filter_input(INPUT_POST, "buttondec");
+    if($decision==0){
+        header('Location: listlaboratorist.php');
+    }
+    else{
+        try {
 
-    $query = "DELETE FROM employee WHERE eid=:eid";
+            // Connect to the database.
+            include('connection.php');
 
-    $ps = $con->prepare($query);
-    $ps->execute(array(':eid' => $eid));
+            $query = "DELETE FROM employee WHERE eid=:eid";
 
-    // echo $name, $email, $address, $salary, $id, $emptype, $password;
-    print "<div style=\"text-align: center;\"><h3>Successfully Deleted</h3></div>\n";
-} catch (PDOException $ex) {
-    echo 'ERROR: ' . $ex->getMessage();
-} catch (Exception $ex) {
-    echo 'ERROR: ' . $ex->getMessage();
+            $ps = $con->prepare($query);
+            $ps->execute(array(':eid' => $eid));
+
+           // print "<div style=\"text-align: center;\"><h3>Successfully Deleted</h3></div>\n";
+
+           header('Location: listlaboratorist.php');
+
+        } catch (PDOException $ex) {
+            echo 'ERROR: ' . $ex->getMessage();
+        } catch (Exception $ex) {
+            echo 'ERROR: ' . $ex->getMessage();
+        }
+
+    }
 }
-
 /**
  * Created by PhpStorm.
  * User: madhav
@@ -44,6 +55,19 @@ try {
  * Time: 5:00 AM
  */
 ?>
+
+            <form action="" method="post" class="form-horizontal">
+
+                <div class="control-group">
+                    <label class="control-label" for="buttonno">Confirm Delete?</label>
+                    <div class="controls">
+                        <button id="buttonno" name="buttondec" class="btn btn-success" value="0">No</button>
+                        <button id="buttonyes" name="buttondec" class="btn btn-danger" value="1">Yes</button>
+                    </div>
+                </div>
+
+
+            </form>
 
 </div>
 </div>

@@ -43,7 +43,7 @@ here;
             print "<td>". $e->getaddress() . "</td>";
             print "<td>". $e->getemail()   . "</td>";
             print "<td>". $e->getsalary()  . "</td>";
-            print "<td>&emsp;<a href=updatelaboratorist.php?eid=$eid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletelaboratorist.php?eid=$eid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+            print "<td>&emsp;<a class=\"btn btn-default btn-sm\" href=updatelaboratorist.php?eid=$eid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a class=\"btn btn-default btn-sm\" href=deletelaboratorist.php?eid=$eid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
             print "</tr>";
 
         }
