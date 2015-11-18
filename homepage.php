@@ -4,6 +4,9 @@ $pwd= $_GET["pwd"];
 $email= $_GET["email"];
 $result="";
 
+session_start();
+$_SESSION["username"] = $email;
+
 try {   
             // Connect to the database.
             include('connection.php');
