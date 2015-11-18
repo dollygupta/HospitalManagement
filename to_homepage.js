@@ -1,5 +1,5 @@
 
-var email="";
+
 function goTohomepage(){
 	var pwd=document.getElementById('pwd').value;
 	var email=document.getElementById('email').value;
