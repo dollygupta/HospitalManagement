@@ -7,8 +7,8 @@
         <div class="container-fluid">
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="moniter1.php">Lab Test</a></li>
-                    <li class=""><a href="monitor2.php">Rooms</a></li>
+                    <li class=""><a href="moniter1.php">Lab Test</a></li>
+                    <li class="active"><a href="monitor2.php">Rooms</a></li>
                      <li class=""><a href="">Drugs</a></li>
 
                 </ul>
@@ -18,20 +18,20 @@
 
      <?php
       include('connectionAnalytics.php');
-      $query1 = "SELECT d_name FROM doctor";
+      $query1 = "select distinct dept_name FROM department";
             $ps = $con->prepare($query1);
             $ps->execute();
             $data1 = $ps->fetchAll(PDO::FETCH_ASSOC);
 
-        $query2 = "select distinct test_name from lab_report;";
+        $query2 = "select distinct room_type from inpatient;";
             $ps = $con->prepare($query2);
             $ps->execute();
             $data2 = $ps->fetchAll(PDO::FETCH_ASSOC);
      print <<<here
      <form>
-     Doctor Name:
+     Department Name:
 here;
-        echo '<select id="d_name" name="d_name">
+        echo '<select id="dept_name" name="dept_name">
         <option value="%">--</option>'; 
         foreach ($data1 as $row){
              foreach ($row as $name => $value){
@@ -39,8 +39,8 @@ here;
              }
         }
         echo '</select>';
-        echo 'Test Name';
-        echo '<select id="test_name" name="test_name">
+        echo 'Room type';
+        echo '<select id="room_type" name="room_type">
          <option value="%">--</option>'; 
         foreach ($data2 as $row){
              foreach ($row as $name => $value){
@@ -63,17 +63,17 @@ here;
 </div>
 <script type="text/javascript">
 function sendtoTable(){
-    var d_name=document.getElementById('d_name').value;
-    var test_name=document.getElementById('test_name').value;
+    var dept_name=document.getElementById('dept_name').value;
+    var room_type=document.getElementById('room_type').value;
     var duration=document.getElementById('duration').value;
-   sendAjax(d_name,test_name,duration);
+   sendAjax(dept_name,room_type,duration);
 }
 
 
-function sendAjax(d_name,test_name,duration){
+function sendAjax(dept_name,room_type,duration){
     
     var xttp = new XMLHttpRequest();
-    xttp.open("GET", "testFact.php?d_name="+d_name+"&test_name="+test_name+"&duration="+duration, true);
+    xttp.open("GET", "roomFact.php?dept_name="+dept_name+"&room_type="+room_type+"&duration="+duration, true);
     xttp.onreadystatechange = function() { 
     if (xttp.readyState == XMLHttpRequest.DONE && xttp.status == 200) {
     var result=xttp.responseText.trim();
