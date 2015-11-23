@@ -6,7 +6,6 @@ $result="";
 
 session_start();
 $_SESSION["username"] = $email;
-
 try {   
             // Connect to the database.
             include('connection.php');
