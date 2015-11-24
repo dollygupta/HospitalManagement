@@ -4,7 +4,6 @@ function goTohomepage(){
 	var pwd=document.getElementById('pwd').value;
 	var email=document.getElementById('email').value;
 	var user_type=document.getElementById('user_type').value;
-	
 	sendAjaxData(pwd,email,user_type);
 }
 

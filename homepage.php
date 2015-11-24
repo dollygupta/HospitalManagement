@@ -4,7 +4,9 @@ $pwd= $_GET["pwd"];
 $email= $_GET["email"];
 $result="";
 
-try {   
+try {
+session_start();
+$_SESSION["username"] = $email;    
             // Connect to the database.
             include('connection.php');
 
@@ -25,6 +27,20 @@ try {
                  $data = $ps->fetchAll(PDO::FETCH_ASSOC);
                  if (count($data) > 0) {
                     echo "doctor";
+                 }
+                 else {
+                    echo "wrong";
+                 }
+
+            }
+            else if($user_type=="patient")
+            {
+                $query = "SELECT * FROM patient WHERE emailid=:email and password=:pwd";
+                 $ps = $con->prepare($query);
+                 $ps->execute(array(':email' => $email,':pwd' => $pwd));
+                 $data = $ps->fetchAll(PDO::FETCH_ASSOC);
+                 if (count($data) > 0) {
+                    echo "patient";
                  }
                  else {
                     echo "wrong";
