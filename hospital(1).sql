@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.0.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2015 at 09:00 PM
--- Server version: 10.0.17-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: Nov 24, 2015 at 10:35 AM
+-- Server version: 10.1.8-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,7 +31,7 @@ CREATE TABLE `appointment` (
   `appt_reason` varchar(45) NOT NULL,
   `time` time NOT NULL,
   `date` date NOT NULL,
-  `r_id` int(11) NOT NULL,
+  `r_id` int(11) DEFAULT NULL,
   `d_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,10 +41,11 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appt_id`, `appt_reason`, `time`, `date`, `r_id`, `d_id`, `p_id`) VALUES
+(1, 'fever', '09:00:00', '2015-11-23', 1, 4, 1),
 (6, 'fever', '08:53:00', '2015-11-18', 6, 1, 6),
-(7, 'fever', '02:36:00', '2015-12-17', 7, 2, 7),
-(8, 'fever', '01:33:00', '2015-07-02', 6, 3, 8),
-(9, 'fever', '04:58:00', '2014-10-14', 7, 4, 9),
+(7, 'fever', '02:36:00', '2015-11-23', 7, 2, 7),
+(8, 'fever', '01:33:00', '2015-11-24', 6, 2, 8),
+(9, 'fever', '04:58:00', '2014-11-30', 7, 4, 9),
 (10, 'fever', '07:44:00', '2015-04-15', 7, 5, 10),
 (11, 'fever', '10:09:00', '2015-10-19', 6, 6, 11),
 (12, 'fever', '11:04:00', '2015-09-08', 7, 7, 12),
@@ -135,7 +136,9 @@ INSERT INTO `appointment` (`appt_id`, `appt_reason`, `time`, `date`, `r_id`, `d_
 (97, 'fever', '10:52:00', '2015-01-14', 7, 2, 97),
 (98, 'fever', '05:52:00', '2015-05-20', 6, 3, 98),
 (99, 'fever', '07:11:00', '2014-11-15', 7, 4, 99),
-(100, 'fever', '08:26:00', '2015-03-06', 7, 5, 100);
+(100, 'fever', '08:26:00', '2015-03-06', 7, 5, 100),
+(101, 'Eye Pain', '11:00:00', '2015-11-24', 1, 1, 3),
+(102, 'Stomach Ache', '10:00:00', '2015-11-24', NULL, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -264,6 +267,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`EID`, `Address`, `Name`, `Email`, `Salary`, `Type`) VALUES
+(0, 'San jose', 'Kil Mil', 'kilmil', 123456, 'Nurse'),
 (1, 'Lucreta Avenue. San Jose', 'Jim Lok', 'jim.lok@gmail.com', 10000, 'Lab Technician'),
 (2, 'Lok avenue, San Jose', 'Harry Li', 'harry.li@gmail.com', 10000, 'Lab Technician'),
 (3, 'San Mateo, California', 'Kim Lok', 'me@gmail.com', 20000, 'Receptionist'),
@@ -272,7 +276,8 @@ INSERT INTO `employee` (`EID`, `Address`, `Name`, `Email`, `Salary`, `Type`) VAL
 (6, 'San Deigo, California', 'Jillki Re', 'hi@gmail.com', 20000, 'Receptionist'),
 (7, 'San Deigo, California', 'Jillki Re', 'hi@gmail.com', 20000, 'Receptionist'),
 (8, 'San Jose', 'Julu', 'julu@gmail.com', 2000, 'Nurse'),
-(9, 'San Jose', 'Jill', 'jill@gmail.com', 2000, 'Nurse');
+(9, 'San Jose', 'Jill', 'jill@gmail.com', 2000, 'Nurse'),
+(10, 'Santa Clara', 'Lim Kon', 'limkon', 20013, 'Nurse');
 
 -- --------------------------------------------------------
 
@@ -352,9 +357,12 @@ CREATE TABLE `inpatient` (
 
 INSERT INTO `inpatient` (`inpatient_id`, `date_admission`, `date_discharge`, `p_id`, `room_id`, `nurse_id`) VALUES
 (1, '2015-07-15', '2015-09-26', 1, 100, 8),
+(4, '2015-11-03', '0000-00-00', 4, 101, 8),
 (5, '2015-09-15', '0000-00-00', 1, 100, 8),
 (6, '2015-10-08', '0000-00-00', 2, 101, 9),
-(7, '2015-09-15', '0000-00-00', 3, 102, 9);
+(7, '2015-09-15', '0000-00-00', 3, 102, 9),
+(8, '2015-11-24', '0000-00-00', 4, 102, 0),
+(9, '2015-11-24', '0000-00-00', 6, 102, 10);
 
 -- --------------------------------------------------------
 
@@ -417,115 +425,118 @@ CREATE TABLE `patient` (
   `p_gender` char(1) NOT NULL,
   `p_dob` date NOT NULL,
   `p_weight` float NOT NULL,
-  `p_address` varchar(255) NOT NULL
+  `p_address` varchar(255) NOT NULL,
+  `emailid` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `profilepic` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`p_id`, `p_name`, `p_gender`, `p_dob`, `p_weight`, `p_address`) VALUES
-(0, 'p_name', 'F', '2005-03-09', 28, 'p_address'),
-(1, 'James Smith', 'M', '1990-03-22', 65, 'San Jose, CA'),
-(2, 'Harry Loy', 'M', '1992-05-21', 60, 'San Jose, CA'),
-(3, 'Rose', 'F', '1960-06-18', 70, '0 Bay Drive'),
-(4, 'Daniel', 'M', '1987-06-13', 65, '5414 Mandrake Place'),
-(5, 'Steven', 'F', '2013-01-19', 2, '98 Mayer Hill'),
-(6, 'Jeremy', 'F', '1960-06-18', 70, '0 Loftsgordon Court'),
-(7, 'Martha', 'M', '2005-03-09', 28, '73 Anderson Circle'),
-(8, 'Jessica', 'M', '1987-06-13', 65, '45 Toban Lane'),
-(9, 'Mildred', 'F', '1960-06-18', 70, '903 6th Crossing'),
-(10, 'Ryan', 'F', '2013-01-19', 2, '7 Melody Road'),
-(11, 'Anna', 'F', '2000-09-21', 38, '8281 Kenwood Parkway'),
-(12, 'Anne', 'F', '1960-06-18', 70, '50731 Hintze Lane'),
-(13, 'Karen', 'F', '2000-09-21', 38, '05041 Jenifer Drive'),
-(14, 'Laura', 'F', '2005-03-09', 28, '3300 Stone Corner Avenue'),
-(15, 'Brian', 'F', '2013-01-19', 2, '78 Manley Crossing'),
-(16, 'Joe', 'F', '1987-06-13', 65, '50442 Anhalt Trail'),
-(17, 'Gary', 'F', '2000-09-21', 38, '249 Waxwing Parkway'),
-(18, 'Ronald', 'F', '1960-06-18', 70, '710 Menomonie Alley'),
-(19, 'Annie', 'F', '2000-09-21', 38, '8 Stephen Place'),
-(20, 'Todd', 'F', '2013-01-19', 2, '3 Laurel Hill'),
-(21, 'Carolyn', 'F', '2005-03-09', 28, '1 Fairview Center'),
-(22, 'Marilyn', 'M', '1994-01-19', 60, '7014 Algoma Court'),
-(23, 'Richard', 'M', '2000-09-21', 38, '282 Butternut Hill'),
-(24, 'Tammy', 'F', '1960-06-18', 70, '327 Elmside Hill'),
-(25, 'Janice', 'F', '2013-01-19', 2, '63 Burrows Junction'),
-(26, 'Joshua', 'M', '1994-01-19', 60, '2878 Twin Pines Center'),
-(27, 'Todd', 'F', '1960-06-18', 70, '198 Sunbrook Circle'),
-(28, 'Heather', 'M', '2005-03-09', 28, '5477 Bunting Terrace'),
-(29, 'Andrew', 'M', '2000-09-21', 38, '05 Chive Point'),
-(30, 'Matthew', 'F', '2013-01-19', 2, '6446 Express Street'),
-(31, 'Raymond', 'M', '2000-09-21', 38, '1321 Pine View Terrace'),
-(32, 'Elizabeth', 'M', '1987-06-13', 65, '2050 Sycamore Alley'),
-(33, 'Alan', 'F', '1960-06-18', 70, '82443 Cordelia Court'),
-(34, 'Earl', 'M', '1994-01-19', 60, '125 Dixon Lane'),
-(35, 'Doris', 'F', '2005-03-09', 28, '4 Graedel Junction'),
-(36, 'Louis', 'F', '1960-06-18', 70, '140 8th Crossing'),
-(37, 'James', 'M', '2000-09-21', 38, '90 Tennessee Hill'),
-(38, 'Russell', 'M', '1994-01-19', 60, '862 Eggendart Trail'),
-(39, 'Paul', 'F', '1960-06-18', 70, '3 Sage Park'),
-(40, 'Helen', 'F', '2013-01-19', 2, '39466 South Drive'),
-(41, 'Paula', 'F', '2000-09-21', 38, '6128 Dawn Street'),
-(42, 'Bobby', 'F', '2005-03-09', 28, '590 Prairieview Trail'),
-(43, 'Nicholas', 'F', '2000-09-21', 38, '135 Spaight Junction'),
-(44, 'Paula', 'F', '1987-06-13', 65, '8598 Columbus Avenue'),
-(45, 'Dennis', 'F', '2013-01-19', 2, '54 Anderson Plaza'),
-(46, 'Alice', 'F', '1994-01-19', 60, '3 Burning Wood Junction'),
-(47, 'Howard', 'F', '2000-09-21', 38, '6279 Tomscot Lane'),
-(48, 'Scott', 'F', '1960-06-18', 70, '49 Pine View Drive'),
-(49, 'Bobby', 'F', '2005-03-09', 28, '11725 Spaight Terrace'),
-(50, 'Jennifer', 'F', '2013-01-19', 2, '08 Schlimgen Park'),
-(51, 'Gregory', 'F', '1960-06-18', 70, '6496 Nobel Center'),
-(52, 'Matthew', 'M', '1987-06-13', 65, '27 Susan Crossing'),
-(53, 'Rachel', 'M', '2000-09-21', 38, '5 Derek Terrace'),
-(54, 'Justin', 'F', '1960-06-18', 70, '832 Clyde Gallagher Park'),
-(55, 'Katherine', 'F', '2013-01-19', 2, '15470 Claremont Court'),
-(56, 'Christina', 'M', '2005-03-09', 28, '59 Crowley Avenue'),
-(57, 'Jonathan', 'F', '1960-06-18', 70, '18 Browning Parkway'),
-(58, 'Katherine', 'M', '1994-01-19', 60, '91 New Castle Trail'),
-(59, 'Arthur', 'M', '2000-09-21', 38, '70 Dawn Place'),
-(60, 'Jean', 'F', '2013-01-19', 2, '8926 Lillian Plaza'),
-(61, 'Dorothy', 'M', '2000-09-21', 38, '37 Manufacturers Terrace'),
-(62, 'Shawn', 'M', '1994-01-19', 60, '442 Kensington Center'),
-(63, 'Jessica', 'F', '2005-03-09', 28, '39 Waubesa Road'),
-(64, 'Amanda', 'M', '1987-06-13', 65, '78 Alpine Road'),
-(65, 'Harry', 'F', '2013-01-19', 2, '18172 Mayfield Junction'),
-(66, 'Shawn', 'F', '1960-06-18', 70, '4 Sutherland Hill'),
-(67, 'Anne', 'M', '2000-09-21', 38, '80 Iowa Crossing'),
-(68, 'Judith', 'M', '1987-06-13', 65, '9 Bluejay Hill'),
-(69, 'Evelyn', 'F', '1960-06-18', 70, '3 Randy Avenue'),
-(70, 'Paula', 'F', '2005-03-09', 28, '70 Columbus Junction'),
-(71, 'Brenda', 'M', '2000-09-21', 38, '1 Fremont Drive'),
-(72, 'Gary', 'F', '1960-06-18', 70, '09719 Forest Run Court'),
-(73, 'Tammy', 'M', '2000-09-21', 38, '644 Huxley Hill'),
-(74, 'Margaret', 'M', '1994-01-19', 60, '8 Blue Bill Park Drive'),
-(75, 'Richard', 'F', '2013-01-19', 2, '00 Drewry Lane'),
-(76, 'Juan', 'M', '1987-06-13', 65, '9 Duke Crossing'),
-(77, 'Phillip', 'M', '2005-03-09', 28, '2961 Rigney Plaza'),
-(78, 'Diane', 'F', '1960-06-18', 70, '72701 Arrowood Lane'),
-(79, 'Rachel', 'M', '2000-09-21', 38, '64471 Pepper Wood Park'),
-(80, 'Bonnie', 'F', '2013-01-19', 2, '312 Jenna Avenue'),
-(81, 'Scott', 'F', '1960-06-18', 70, '0 Ilene Circle'),
-(82, 'Rachel', 'M', '1994-01-19', 60, '3 Mcguire Place'),
-(83, 'Brenda', 'M', '2000-09-21', 38, '13 Ridge Oak Hill'),
-(84, 'Nancy', 'F', '2005-03-09', 28, '128 8th Trail'),
-(85, 'Willie', 'F', '2013-01-19', 2, '5 Sunnyside Way'),
-(86, 'Adam', 'M', '1994-01-19', 60, '25 Northland Junction'),
-(87, 'Justin', 'F', '1960-06-18', 70, '42111 Charing Cross Park'),
-(88, 'Stephen', 'M', '1987-06-13', 65, '232 Duke Trail'),
-(89, 'Benjamin', 'M', '2000-09-21', 38, '316 Huxley Trail'),
-(90, 'Diana', 'F', '2013-01-19', 2, '31 Eliot Drive'),
-(91, 'Jose', 'M', '2005-03-09', 28, '0 Scott Center'),
-(92, 'Wanda', 'M', '1987-06-13', 65, '2766 Stephen Junction'),
-(93, 'Benjamin', 'F', '1960-06-18', 70, '2 Thierer Way'),
-(94, 'Louis', 'M', '1994-01-19', 60, '45307 Sugar Parkway'),
-(95, 'Virginia', 'F', '2013-01-19', 2, '61 Northview Point'),
-(96, 'Judith', 'F', '1960-06-18', 70, '56039 Union Way'),
-(97, 'Gerald', 'M', '2000-09-21', 38, '3990 Continental Junction'),
-(98, 'Cynthia', 'M', '2005-03-09', 28, '10780 Northview Drive'),
-(99, 'Fred', 'F', '1960-06-18', 70, '40 Elgar Circle'),
-(100, 'Lawrence', 'F', '2013-01-19', 2, '115 Arkansas Way');
+INSERT INTO `patient` (`p_id`, `p_name`, `p_gender`, `p_dob`, `p_weight`, `p_address`, `emailid`, `password`, `profilepic`) VALUES
+(0, 'p_name', 'F', '2005-03-09', 28, 'p_address', 'p_name', '2005-03-09', ''),
+(1, 'James Smith', 'M', '1990-03-22', 65, 'San Jose, CA', 'James Smith', '1990-03-22', ''),
+(2, 'Harry Loy', 'M', '1992-05-21', 60, 'San Jose, CA', 'Harry Loy', '1992-05-21', ''),
+(3, 'Rose', 'F', '1960-06-18', 70, '0 Bay Drive', 'Rose', '1960-06-18', ''),
+(4, 'Daniel', 'M', '1987-06-13', 65, '5414 Mandrake Place', 'Daniel', '1987-06-13', ''),
+(5, 'Steven', 'F', '2013-01-19', 2, '98 Mayer Hill', 'Steven', '2013-01-19', ''),
+(6, 'Jeremy', 'F', '1960-06-18', 70, '0 Loftsgordon Court', 'Jeremy', '1960-06-18', ''),
+(7, 'Martha', 'M', '2005-03-09', 28, '73 Anderson Circle', 'Martha', '2005-03-09', ''),
+(8, 'Jessica', 'M', '1987-06-13', 65, '45 Toban Lane', 'Jessica', '1987-06-13', ''),
+(9, 'Mildred', 'F', '1960-06-18', 70, '903 6th Crossing', 'Mildred', '1960-06-18', ''),
+(10, 'Ryan', 'F', '2013-01-19', 2, '7 Melody Road', 'Ryan', '2013-01-19', ''),
+(11, 'Anna', 'F', '2000-09-21', 38, '8281 Kenwood Parkway', 'Anna', '2000-09-21', ''),
+(12, 'Anne', 'F', '1960-06-18', 70, '50731 Hintze Lane', 'Anne', '1960-06-18', ''),
+(13, 'Karen', 'F', '2000-09-21', 38, '05041 Jenifer Drive', 'Karen', '2000-09-21', ''),
+(14, 'Laura', 'F', '2005-03-09', 28, '3300 Stone Corner Avenue', 'Laura', '2005-03-09', ''),
+(15, 'Brian', 'F', '2013-01-19', 2, '78 Manley Crossing', 'Brian', '2013-01-19', ''),
+(16, 'Joe', 'F', '1987-06-13', 65, '50442 Anhalt Trail', 'Joe', '1987-06-13', ''),
+(17, 'Gary', 'F', '2000-09-21', 38, '249 Waxwing Parkway', 'Gary', '2000-09-21', ''),
+(18, 'Ronald', 'F', '1960-06-18', 70, '710 Menomonie Alley', 'Ronald', '1960-06-18', ''),
+(19, 'Annie', 'F', '2000-09-21', 38, '8 Stephen Place', 'Annie', '2000-09-21', ''),
+(20, 'Todd', 'F', '2013-01-19', 2, '3 Laurel Hill', 'Todd', '2013-01-19', ''),
+(21, 'Carolyn', 'F', '2005-03-09', 28, '1 Fairview Center', 'Carolyn', '2005-03-09', ''),
+(22, 'Marilyn', 'M', '1994-01-19', 60, '7014 Algoma Court', 'Marilyn', '1994-01-19', ''),
+(23, 'Richard', 'M', '2000-09-21', 38, '282 Butternut Hill', 'Richard', '2000-09-21', ''),
+(24, 'Tammy', 'F', '1960-06-18', 70, '327 Elmside Hill', 'Tammy', '1960-06-18', ''),
+(25, 'Janice', 'F', '2013-01-19', 2, '63 Burrows Junction', 'Janice', '2013-01-19', ''),
+(26, 'Joshua', 'M', '1994-01-19', 60, '2878 Twin Pines Center', 'Joshua', '1994-01-19', ''),
+(27, 'Todd', 'F', '1960-06-18', 70, '198 Sunbrook Circle', 'Todd', '1960-06-18', ''),
+(28, 'Heather', 'M', '2005-03-09', 28, '5477 Bunting Terrace', 'Heather', '2005-03-09', ''),
+(29, 'Andrew', 'M', '2000-09-21', 38, '05 Chive Point', 'Andrew', '2000-09-21', ''),
+(30, 'Matthew', 'F', '2013-01-19', 2, '6446 Express Street', 'Matthew', '2013-01-19', ''),
+(31, 'Raymond', 'M', '2000-09-21', 38, '1321 Pine View Terrace', 'Raymond', '2000-09-21', ''),
+(32, 'Elizabeth', 'M', '1987-06-13', 65, '2050 Sycamore Alley', 'Elizabeth', '1987-06-13', ''),
+(33, 'Alan', 'F', '1960-06-18', 70, '82443 Cordelia Court', 'Alan', '1960-06-18', ''),
+(34, 'Earl', 'M', '1994-01-19', 60, '125 Dixon Lane', 'Earl', '1994-01-19', ''),
+(35, 'Doris', 'F', '2005-03-09', 28, '4 Graedel Junction', 'Doris', '2005-03-09', ''),
+(36, 'Louis', 'F', '1960-06-18', 70, '140 8th Crossing', 'Louis', '1960-06-18', ''),
+(37, 'James', 'M', '2000-09-21', 38, '90 Tennessee Hill', 'James', '2000-09-21', ''),
+(38, 'Russell', 'M', '1994-01-19', 60, '862 Eggendart Trail', 'Russell', '1994-01-19', ''),
+(39, 'Paul', 'F', '1960-06-18', 70, '3 Sage Park', 'Paul', '1960-06-18', ''),
+(40, 'Helen', 'F', '2013-01-19', 2, '39466 South Drive', 'Helen', '2013-01-19', ''),
+(41, 'Paula', 'F', '2000-09-21', 38, '6128 Dawn Street', 'Paula', '2000-09-21', ''),
+(42, 'Bobby', 'F', '2005-03-09', 28, '590 Prairieview Trail', 'Bobby', '2005-03-09', ''),
+(43, 'Nicholas', 'F', '2000-09-21', 38, '135 Spaight Junction', 'Nicholas', '2000-09-21', ''),
+(44, 'Paula', 'F', '1987-06-13', 65, '8598 Columbus Avenue', 'Paula', '1987-06-13', ''),
+(45, 'Dennis', 'F', '2013-01-19', 2, '54 Anderson Plaza', 'Dennis', '2013-01-19', ''),
+(46, 'Alice', 'F', '1994-01-19', 60, '3 Burning Wood Junction', 'Alice', '1994-01-19', ''),
+(47, 'Howard', 'F', '2000-09-21', 38, '6279 Tomscot Lane', 'Howard', '2000-09-21', ''),
+(48, 'Scott', 'F', '1960-06-18', 70, '49 Pine View Drive', 'Scott', '1960-06-18', ''),
+(49, 'Bobby', 'F', '2005-03-09', 28, '11725 Spaight Terrace', 'Bobby', '2005-03-09', ''),
+(50, 'Jennifer', 'F', '2013-01-19', 2, '08 Schlimgen Park', 'Jennifer', '2013-01-19', ''),
+(51, 'Gregory', 'F', '1960-06-18', 70, '6496 Nobel Center', 'Gregory', '1960-06-18', ''),
+(52, 'Matthew', 'M', '1987-06-13', 65, '27 Susan Crossing', 'Matthew', '1987-06-13', ''),
+(53, 'Rachel', 'M', '2000-09-21', 38, '5 Derek Terrace', 'Rachel', '2000-09-21', ''),
+(54, 'Justin', 'F', '1960-06-18', 70, '832 Clyde Gallagher Park', 'Justin', '1960-06-18', ''),
+(55, 'Katherine', 'F', '2013-01-19', 2, '15470 Claremont Court', 'Katherine', '2013-01-19', ''),
+(56, 'Christina', 'M', '2005-03-09', 28, '59 Crowley Avenue', 'Christina', '2005-03-09', ''),
+(57, 'Jonathan', 'F', '1960-06-18', 70, '18 Browning Parkway', 'Jonathan', '1960-06-18', ''),
+(58, 'Katherine', 'M', '1994-01-19', 60, '91 New Castle Trail', 'Katherine', '1994-01-19', ''),
+(59, 'Arthur', 'M', '2000-09-21', 38, '70 Dawn Place', 'Arthur', '2000-09-21', ''),
+(60, 'Jean', 'F', '2013-01-19', 2, '8926 Lillian Plaza', 'Jean', '2013-01-19', ''),
+(61, 'Dorothy', 'M', '2000-09-21', 38, '37 Manufacturers Terrace', 'Dorothy', '2000-09-21', ''),
+(62, 'Shawn', 'M', '1994-01-19', 60, '442 Kensington Center', 'Shawn', '1994-01-19', ''),
+(63, 'Jessica', 'F', '2005-03-09', 28, '39 Waubesa Road', 'Jessica', '2005-03-09', ''),
+(64, 'Amanda', 'M', '1987-06-13', 65, '78 Alpine Road', 'Amanda', '1987-06-13', ''),
+(65, 'Harry', 'F', '2013-01-19', 2, '18172 Mayfield Junction', 'Harry', '2013-01-19', ''),
+(66, 'Shawn', 'F', '1960-06-18', 70, '4 Sutherland Hill', 'Shawn', '1960-06-18', ''),
+(67, 'Anne', 'M', '2000-09-21', 38, '80 Iowa Crossing', 'Anne', '2000-09-21', ''),
+(68, 'Judith', 'M', '1987-06-13', 65, '9 Bluejay Hill', 'Judith', '1987-06-13', ''),
+(69, 'Evelyn', 'F', '1960-06-18', 70, '3 Randy Avenue', 'Evelyn', '1960-06-18', ''),
+(70, 'Paula', 'F', '2005-03-09', 28, '70 Columbus Junction', 'Paula', '2005-03-09', ''),
+(71, 'Brenda', 'M', '2000-09-21', 38, '1 Fremont Drive', 'Brenda', '2000-09-21', ''),
+(72, 'Gary', 'F', '1960-06-18', 70, '09719 Forest Run Court', 'Gary', '1960-06-18', ''),
+(73, 'Tammy', 'M', '2000-09-21', 38, '644 Huxley Hill', 'Tammy', '2000-09-21', ''),
+(74, 'Margaret', 'M', '1994-01-19', 60, '8 Blue Bill Park Drive', 'Margaret', '1994-01-19', ''),
+(75, 'Richard', 'F', '2013-01-19', 2, '00 Drewry Lane', 'Richard', '2013-01-19', ''),
+(76, 'Juan', 'M', '1987-06-13', 65, '9 Duke Crossing', 'Juan', '1987-06-13', ''),
+(77, 'Phillip', 'M', '2005-03-09', 28, '2961 Rigney Plaza', 'Phillip', '2005-03-09', ''),
+(78, 'Diane', 'F', '1960-06-18', 70, '72701 Arrowood Lane', 'Diane', '1960-06-18', ''),
+(79, 'Rachel', 'M', '2000-09-21', 38, '64471 Pepper Wood Park', 'Rachel', '2000-09-21', ''),
+(80, 'Bonnie', 'F', '2013-01-19', 2, '312 Jenna Avenue', 'Bonnie', '2013-01-19', ''),
+(81, 'Scott', 'F', '1960-06-18', 70, '0 Ilene Circle', 'Scott', '1960-06-18', ''),
+(82, 'Rachel', 'M', '1994-01-19', 60, '3 Mcguire Place', 'Rachel', '1994-01-19', ''),
+(83, 'Brenda', 'M', '2000-09-21', 38, '13 Ridge Oak Hill', 'Brenda', '2000-09-21', ''),
+(84, 'Nancy', 'F', '2005-03-09', 28, '128 8th Trail', 'Nancy', '2005-03-09', ''),
+(85, 'Willie', 'F', '2013-01-19', 2, '5 Sunnyside Way', 'Willie', '2013-01-19', ''),
+(86, 'Adam', 'M', '1994-01-19', 60, '25 Northland Junction', 'Adam', '1994-01-19', ''),
+(87, 'Justin', 'F', '1960-06-18', 70, '42111 Charing Cross Park', 'Justin', '1960-06-18', ''),
+(88, 'Stephen', 'M', '1987-06-13', 65, '232 Duke Trail', 'Stephen', '1987-06-13', ''),
+(89, 'Benjamin', 'M', '2000-09-21', 38, '316 Huxley Trail', 'Benjamin', '2000-09-21', ''),
+(90, 'Diana', 'F', '2013-01-19', 2, '31 Eliot Drive', 'Diana', '2013-01-19', ''),
+(91, 'Jose', 'M', '2005-03-09', 28, '0 Scott Center', 'Jose', '2005-03-09', ''),
+(92, 'Wanda', 'M', '1987-06-13', 65, '2766 Stephen Junction', 'Wanda', '1987-06-13', ''),
+(93, 'Benjamin', 'F', '1960-06-18', 70, '2 Thierer Way', 'Benjamin', '1960-06-18', ''),
+(94, 'Louis', 'M', '1994-01-19', 60, '45307 Sugar Parkway', 'Louis', '1994-01-19', ''),
+(95, 'Virginia', 'F', '2013-01-19', 2, '61 Northview Point', 'Virginia', '2013-01-19', ''),
+(96, 'Judith', 'F', '1960-06-18', 70, '56039 Union Way', 'Judith', '1960-06-18', ''),
+(97, 'Gerald', 'M', '2000-09-21', 38, '3990 Continental Junction', 'Gerald', '2000-09-21', ''),
+(98, 'Cynthia', 'M', '2005-03-09', 28, '10780 Northview Drive', 'Cynthia', '2005-03-09', ''),
+(99, 'Fred', 'F', '1960-06-18', 70, '40 Elgar Circle', 'Fred', '1960-06-18', ''),
+(100, 'Lawrence', 'F', '2013-01-19', 2, '115 Arkansas Way', 'Lawrence', '2013-01-19', '');
 
 -- --------------------------------------------------------
 
@@ -534,7 +545,7 @@ INSERT INTO `patient` (`p_id`, `p_name`, `p_gender`, `p_dob`, `p_weight`, `p_add
 --
 
 CREATE TABLE `patient_history` (
-  `pid` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
   `message` varchar(500) NOT NULL,
   `prescription` varchar(500) NOT NULL,
   `pat_his_id` int(11) NOT NULL
@@ -604,7 +615,7 @@ CREATE TABLE `room` (
 INSERT INTO `room` (`room_id`, `type`, `status`, `room_fees`) VALUES
 (100, 'vip', 'full', '200'),
 (101, 'General', 'full', '500'),
-(102, 'general', 'empty', '600'),
+(102, 'general', 'full', '600'),
 (103, 'General', 'empty', '500'),
 (104, 'general', 'empty', '600');
 
@@ -709,7 +720,7 @@ ALTER TABLE `patient`
 -- Indexes for table `patient_history`
 --
 ALTER TABLE `patient_history`
-  ADD PRIMARY KEY (`pid`,`pat_his_id`);
+  ADD PRIMARY KEY (`p_id`,`pat_his_id`);
 
 --
 -- Indexes for table `patient_phone`
@@ -734,6 +745,11 @@ ALTER TABLE `room`
 --
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `appt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+--
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
@@ -747,7 +763,7 @@ ALTER TABLE `files`
 -- AUTO_INCREMENT for table `inpatient`
 --
 ALTER TABLE `inpatient`
-  MODIFY `inpatient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `inpatient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
@@ -806,7 +822,7 @@ ALTER TABLE `lab_report`
 -- Constraints for table `patient_history`
 --
 ALTER TABLE `patient_history`
-  ADD CONSTRAINT `patient_history_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `patient` (`p_id`);
+  ADD CONSTRAINT `patient_history_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `patient` (`p_id`);
 
 --
 -- Constraints for table `patient_phone`
