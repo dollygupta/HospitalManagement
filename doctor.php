@@ -1,6 +1,7 @@
 <?php include('doctorcommon.html');?>
 <div class="content">
     <h2>Doctor Dashboard</h2>
+
     <?php 
 
 include('connection.php');
@@ -98,6 +99,7 @@ echo "<BR><BR><BR><BR>";
 
 
 ?>
+
 </div>
 <?php include('footer.html');?>
     
