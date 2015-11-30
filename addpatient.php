@@ -29,6 +29,9 @@ ini_set('display_errors', 1);
             $password = filter_input(INPUT_POST, "email");
 
             try {
+                if (empty($name) || empty($email) || empty($address) || empty($gender) || empty($dob) || empty($weight)) {
+                    throw new Exception("Missing Details.");
+                }
 
                 // Connect to the database.
                 include('connection.php');

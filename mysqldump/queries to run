@@ -1,0 +1,11 @@
+ALTER TABLE `hospital`.`doctor` 
+CHANGE COLUMN `d_id` `d_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+
+ALTER TABLE `hospital`.`department`
+CHANGE COLUMN `dept_id` `dept_id` INT(11) NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `no_of_doctors` `no_of_doctors` INT(11) NOT NULL DEFAULT 0 ;
+
+Error Thrown ->
+ERROR 1833: Cannot change column 'dept_id': used in a foreign key constraint 'fk_doctor_1' of table 'hospital.doctor'
+SQL Statement:
