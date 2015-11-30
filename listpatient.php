@@ -65,7 +65,7 @@ here;
     print "<td>". $p->getgender()  . "</td>";
     print "<td>". $p->getdob()     . "</td>";
     print "<td>". $p->getweight()  . "</td>";
-    print "<td>&emsp;<a href=updatepatient.php?eid=$pid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepatient.php?eid=$pid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+    print "<td>&emsp;<a href=updatepatient.php?pid=$pid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepatient.php?pid=$pid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
     print "</tr>";
 
 }

@@ -91,11 +91,18 @@ $(document).ready(function(){
                 </p>
             </div>
 
+
             <div class="control-group">
                 <label class="control-label" for="date1">Date: </label>
                  <input name='date' type='date' placeholder='Enter date: ' value='' required=''>
 
             </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="date">Date: </label>
+                   
+                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required>
+
 
             <div >
                 <label class="control-label" for="submit"></label>
@@ -145,9 +152,17 @@ $(document).ready(function(){
                   
                   
                      <div class="control-group">
+=======
+                        <p>
+                        Time :
+                        <input id="time" name="time" type="time" placeholder="Enter time: " class=" form-control" value = "hh:mm:ss" required>
+                        </p>
+               
+                <div class="control-group">
+>>>>>>> 9661c9af9013c5c5d11cb2311bf321f7fb9a26c6
                     <label class="control-label" for="reason">Reason</label>
                     <div class="controls">
-                        <input id="reason" name="reason" type="text" placeholder="Enter Reason" class=" form-control" required="">
+                        <input id="reason" name="reason" type="text" placeholder="Enter Reason" class=" form-control" required>
 
                     </div>
                 </div>

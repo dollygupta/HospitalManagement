@@ -29,6 +29,9 @@ ini_set('display_errors', 1);
             $password = filter_input(INPUT_POST, "email");
 
             try {
+                if (empty($name) || empty($email) || empty($address) || empty($gender) || empty($dob) || empty($weight)) {
+                    throw new Exception("Missing Details.");
+                }
 
                 // Connect to the database.
                 include('connection.php');
@@ -60,7 +63,7 @@ ini_set('display_errors', 1);
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
-                    <input id="name" name="name" type="text" placeholder="Enter Full Name" class=" form-control" required="">
+                    <input id="name" name="name" type="text" placeholder="Enter Full Name" class=" form-control" required>
 
                 </div>
             </div>
@@ -68,7 +71,7 @@ ini_set('display_errors', 1);
             <div class="control-group">
                 <label class="control-label" for="email">Email</label>
                 <div class="controls">
-                    <input id="email" name="email" type="email" placeholder="Enter Email Address" class=" form-control" required="">
+                    <input id="email" name="email" type="email" placeholder="Enter Email Address" class=" form-control" required>
 
                 </div>
             </div>
@@ -76,7 +79,7 @@ ini_set('display_errors', 1);
             <div class="control-group">
                 <label class="control-label" for="address">Address</label>
                 <div class="controls">
-                    <input id="address" name="address" type="text" placeholder="Enter Street Address" class=" form-control" required="">
+                    <input id="address" name="address" type="text" placeholder="Enter Street Address" class=" form-control" required>
 
                 </div>
             </div>
@@ -103,7 +106,7 @@ ini_set('display_errors', 1);
             <div class="control-group">
                 <label class="control-label" for="dob">Date of Birth</label>
                 <div class="controls">
-                    <input id="dob" name="dob" type="date" placeholder="Enter Date of Birth" class=" form-control" required="">
+                    <input id="dob" name="dob" type="date" placeholder="Enter Date of Birth" class=" form-control" required>
 
                 </div>
             </div>
@@ -111,7 +114,7 @@ ini_set('display_errors', 1);
             <div class="control-group">
                 <label class="control-label" for="weight">Weight</label>
                 <div class="controls">
-                    <input id="weight" name="weight" type="number" placeholder="Enter Weight" class=" form-control" required="">
+                    <input id="weight" name="weight" type="number" placeholder="Enter Weight" class=" form-control" required>
 
                 </div>
             </div>
