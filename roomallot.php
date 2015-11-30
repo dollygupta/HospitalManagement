@@ -1,5 +1,20 @@
 <?php include('doctorcommon.html');?>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
+<html>
+  <head>
+    <title>My list</title>
+    <script type="text/javascript">
+//----------------------------------------------------------------
+// SENDS SELECTED OPTION TO RETRIEVE DATA TO FILL TABLE.
+function send_option () {
+var sel = document.getElementById( "my_select" );
+var txt = document.getElementById( "my_option" );
+txt.value = sel.options[ sel.selectedIndex ].value;
+var frm = document.getElementById( "my_form" );
+frm.submit();
+}
+//----------------------------------------------------------------
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
 <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
 <script>
 webshims.setOptions('forms-ext', {types: 'date'});
@@ -26,6 +41,9 @@ $(document).ready(function(){
 
 });
 </script>
+  </head>
+  <body>
+
 
 
     <div class="show-table">
@@ -67,36 +85,33 @@ if(isset($_POST['submit'])) {
 ?>
         <form action="" method="post" class="form-horizontal">
 
-                <div class="control-group">
-                    <label class="control-label" for="pid">Pid: </label>
-                    <div class="controls">
-                        <input id="pid" name="pid" type="text" class=" form-control" required="">
+             
+                
 
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="date">Date of admission: </label>
-                   
-                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required="">
-
-                   
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="roomtype">RoomType: </label>
-                    <div class="controls">
-                        <select name="roomtype"> 
-                            <?php
-                            try
+               Select a room type
+    <br/>
+    <select id="my_select" onchange="send_option();">
+      <option>Select an option</option>
+<?php
+ini_set('display_errors', 1);
+//----------------------------------------------------------------
+// LIST FILLED FROM DATABASE (ALLEGEDLY).
+ try
                             {
                             include('connection.php');
-  $query = "select * from room";
+  $query = "select DISTINCT type from room";
  
             $ps = $con->prepare($query);
 
             // Fetch the matching row.
             $ps->execute();
             $data = $ps->fetchAll();
+            if(!(is_null($_POST["my_option"])))
+            {
+                $type=$_POST["my_option"];
+                print "<option value = '".$type."' SELECTED>".$type."</option>";
+            }
+           
             foreach ($data as $row) {
               print "<option value = '".$row['type']."'>".$row['type']."</option>";
             }
@@ -105,25 +120,31 @@ if(isset($_POST['submit'])) {
         catch(Exception $ex)   {
         echo $ex->getMessage();
     }
-                        ?>
+//----------------------------------------------------------------
+?>
+    
+    <br/> 
+    <br/>
+    <table>
+        RoomNo:
+      <select name = "roomno">
 
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="Room No: ">Room No:</label>
-                    <div class="controls">
-                    	<select name="roomno">
-                        <?php
-                            try
+<?php
+//----------------------------------------------------------------
+// TABLE FILLED FROM DATABASE ACCORDING TO SELECTED OPTION.
+if ( IsSet( $_POST["my_option"] ) ) // IF USER SELECTED ANY OPTION.
+{
+      try
                             {
                             include('connection.php');
-  $query = "select * from room where status = 'empty' or status = 'Empty'";
+  $query = "select * from room where type = :type and status in( 'empty','Empty')";
  
             $ps = $con->prepare($query);
+            $ps->bindParam(':type', $_POST["my_option"]);
 
             // Fetch the matching row.
             $ps->execute();
+
             $data = $ps->fetchAll();
             foreach ($data as $row) {
               print "<option value = '".$row['room_id']."'>".$row['room_id']."</option>";
@@ -133,9 +154,38 @@ if(isset($_POST['submit'])) {
         catch(Exception $ex)   {
         echo $ex->getMessage();
     }
-                        ?>
 
-                    </div>
+}
+
+//----------------------------------------------------------------
+?>
+</select>
+    </table>
+
+<!-- FORM TO SEND THE SELECTED OPTION. -->
+  
+   <div class="control-group">
+                    <label class="control-label" for="pid">Patient Name: </label>
+                   <?php
+                   session_start();
+                   $id=$_SESSION["did"];
+                   include('connection.php');
+                 
+        print "<p><td> <select name='pid'>   ";
+        $query = "select a.p_id AS pid,p.p_name AS pname from appointment a,patient p where  a.p_id=p.p_id and d_id=:id";
+       $ps = $con->prepare($query);
+       $ps->bindParam(':id',$id);
+
+        // Fetch the matching row.
+        $ps->execute();
+        $data = $ps->fetchAll();
+        
+        foreach ($data as $row) 
+        {
+        print "<option value = '".$row['pid']."'>".$row['pname']."</option>";
+        }
+        print "</select>";
+                   ?>
                 </div>
 
                 <div class="control-group">
@@ -167,6 +217,14 @@ if(isset($_POST['submit'])) {
                 </div>
 
                 <div class="control-group">
+                    <label class="control-label" for="date">Date of admission: </label>
+                   
+                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required="">
+
+                   
+                </div>
+
+                <div class="control-group">
                     <label class="control-label" for="submit"></label>
                     <div class="controls">
                         <button id="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -174,6 +232,9 @@ if(isset($_POST['submit'])) {
                 </div>
 
         </form>
+          <form method="post" style ="display:none" action""  id="my_form">
+      <input type="text" id="my_option" name="my_option"/>
+    </form>
 
     </div>
 

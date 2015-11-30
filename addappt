@@ -1,0 +1,39 @@
+
+
+
+
+
+//List filled from database
+
+ <div class="control-group">
+                    
+
+                    <div class="controls">
+                        <p>
+                            <b>Doctor Name: </b>
+                          <select name="did"> 
+                            <?php
+                            try
+                            {
+                            include('connection.php');
+  $query = "select * from doctor";
+ 
+            $ps = $con->prepare($query);
+
+            // Fetch the matching row.
+            $ps->execute();
+            $data = $ps->fetchAll();
+            foreach ($data as $row) {
+              print "<option value = '".$row['d_id']."'>".$row['d_name']."</option>";
+            }
+            print "</select>";
+        }
+        catch(Exception $ex)   {
+        echo $ex->getMessage();
+    }
+                        ?>
+                    </div>
+                </p>
+                </div>
+
+

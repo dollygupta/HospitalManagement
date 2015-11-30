@@ -8,7 +8,7 @@
     <div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="http://localhost/HospitalManagement/doctorList.php">Doctor List</a></li>
-        <li><a href="#">Add Doctor</a></li>
+        <li><a href="http://localhost/HospitalManagement/adddoctor.php">Add Doctor</a></li>
       </ul>
     </div>
   </div>

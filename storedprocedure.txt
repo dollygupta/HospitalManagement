@@ -1,0 +1,53 @@
+DELIMITER $$
+
+Create procedure send_message8(IN doc_id int)
+BEGIN
+
+DECLARE v_finished INTEGER DEFAULT 0;
+	DECLARE pid INT DEFAULT 0;
+	DECLARE date1 DATE;
+	DECLARE	 time1 TIME;
+	DECLARE doctorname varchar(400)	DEFAULT "";
+	DECLARE message varchar(400) DEFAULT "";
+	
+
+DECLARE message_cursor CURSOR FOR
+select p_id,date,time from appointment where d_id=doc_id and date >= current_date();
+
+DECLARE CONTINUE HANDLER
+	FOR NOT FOUND SET v_finished=1;
+
+OPEN message_cursor;
+
+
+set_message: LOOP
+
+FETCH message_cursor into pid,date1,time1;
+
+if v_finished=1 then
+leave set_message;
+end if;
+
+select d_name into doctorname from doctor where d_id=doc_id;
+
+SET message = CONCAT('Your appointment has been cancelled under ',CAST(doctorname as CHAR),'on ',CAST(date1 as CHAR),'at ',CAST(time1 as CHAR));
+
+select message;
+
+insert into patient_history (p_id,message,date) VALUES (pid,message,now());
+
+
+END LOOP set_message;
+
+CLOSE message_cursor;
+
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+

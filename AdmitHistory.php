@@ -37,8 +37,6 @@ function createtablerow(inpatient_list $h,& $header)
   print "<col width='150'>";
   print "<col width='150'>";
   print "<col width='150'>";
-  print "<col width='150'>";
-  print "<col width='150'>";
 
   if($header)
   {
@@ -49,9 +47,6 @@ function createtablerow(inpatient_list $h,& $header)
     <th>Date_of_Admission</th>
     <th>Room_No</th>
     <th>Nurse_Name</th>
-    <th>Patient_Name</th>
-    <th>Doctor_Name</th>
-    <th>Lab_Report</th>
     </tr>
 here;
     $header=false;
@@ -64,9 +59,7 @@ here;
   print "<td>". $h->getroom_id() . "</td>";
   print "<td>". $h->getnurse_name() . "</td>";
   print "<td>". $h->getd_name(). "</td>";
-  
-
-  print "</tr>";
+    print "</tr>";
   print "</table>";
 }
 
@@ -92,10 +85,11 @@ try
 
 session_start();
 $id=$_SESSION["id"];
+
   // Connect to the database.
  include('connection.php');
 
-  $query = "SELECT i.inpatient_id ,p.p_id , i.date_admission, r.room_id , e.name , d.d_name FROM inpatient i,patient p,room r,doctor d,employee e, checkup_details c WHERE i.p_id=p.p_id AND r.room_id=i.room_id AND d.d_id=c.d_id AND p.p_id=c.p_id AND e.eid=i.nurse_id AND i.date_discharge is NULL and p.p_id = :pid";
+  $query = "SELECT i.inpatient_id ,p.p_id , i.date_admission, r.room_id , e.name FROM inpatient i,patient p,room r,employee e WHERE i.p_id=p.p_id AND r.room_id=i.room_id AND e.eid=i.nurse_id AND i.date_discharge is NULL and p.p_id = :pid";
   
   $ps = $con->prepare($query);
  $ps->bindParam(':pid', $id);
