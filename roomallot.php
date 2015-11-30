@@ -70,14 +70,14 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="pid">Pid: </label>
                     <div class="controls">
-                        <input id="pid" name="pid" type="text" class=" form-control" required="">
+                        <input id="pid" name="pid" type="text" class=" form-control" required>
 
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="date">Date of admission: </label>
                    
-                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required="">
+                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required>
 
                    
                 </div>

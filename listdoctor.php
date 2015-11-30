@@ -48,6 +48,7 @@ function createtablerow(doctor $d,& $header)
     <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Department</th>
     <th>Street Address</th>
     <th>Email Address</th>
     <th>Phone No</th>
@@ -59,9 +60,24 @@ here;
         $header=false;
     }
     $did=$d->getid();
+    $deptid=$d->getdeptid();
     print "<tr>";
     print "<td>". $d->getid()    . "</td>";
     print "<td>". $d->getname()  . "</td>";
+    include('connection.php');
+
+    $deptfetch = "select * from department where dept_id = $deptid";
+
+    $ps = $con->prepare($deptfetch);
+
+    // Fetch the matching row.
+    $ps->execute();
+    $data = $ps->fetchAll();
+
+    foreach ($data as $row) {
+        print "<td>".$row['dept_name']."</td>";
+    }
+
     print "<td>". $d->getaddress() . "</td>";
     print "<td>". $d->getemail()   . "</td>";
     print "<td>". $d->getphone()   . "</td>";

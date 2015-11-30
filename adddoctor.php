@@ -64,7 +64,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input id="name" name="name" type="text" placeholder="Enter Full Name" class=" form-control" required="">
+                        <input id="name" name="name" type="text" placeholder="Enter Full Name" class=" form-control" required>
 
                     </div>
                 </div>
@@ -72,7 +72,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="email">Email</label>
                     <div class="controls">
-                        <input id="email" name="email" type="email" placeholder="Enter Email Address" class=" form-control" required="">
+                        <input id="email" name="email" type="email" placeholder="Enter Email Address" class=" form-control" required>
 
                     </div>
                 </div>
@@ -80,7 +80,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="address">Address</label>
                     <div class="controls">
-                        <input id="address" name="address" type="text" placeholder="Enter Street Address" class=" form-control" required="">
+                        <input id="address" name="address" type="text" placeholder="Enter Street Address" class=" form-control" required>
 
                     </div>
                 </div>
@@ -89,7 +89,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="phone">Phone Number</label>
                     <div class="controls">
-                        <input id="phone" name="phone" type="tel" placeholder="Enter Phone Number" class=" form-control" required="">
+                        <input id="phone" name="phone" type="tel" placeholder="Enter Phone Number" class=" form-control" required>
 
                     </div>
                 </div>
@@ -97,7 +97,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="consultation">Consultation Fees</label>
                     <div class="controls">
-                        <input id="consultation" name="consultation" type="number" placeholder="Enter Consultation Fees" class=" form-control" required="">
+                        <input id="consultation" name="consultation" type="number" placeholder="Enter Consultation Fees" class=" form-control" required>
 
                     </div>
                 </div>
@@ -105,7 +105,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="salary">Salary</label>
                     <div class="controls">
-                        <input id="salary" name="salary" type="number" placeholder="Enter Salary" class=" form-control" required="">
+                        <input id="salary" name="salary" type="number" placeholder="Enter Salary" class=" form-control" required>
 
                     </div>
                 </div>

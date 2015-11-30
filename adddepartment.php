@@ -60,7 +60,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input id="name" name="name" type="text" placeholder="Enter Department Name" class=" form-control" required="">
+                        <input id="name" name="name" type="text" placeholder="Enter Department Name" class=" form-control" required>
 
                     </div>
                 </div>
@@ -68,7 +68,7 @@ if(isset($_POST['submit'])) {
                 <div class="control-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <input id="description" name="description" type="text" placeholder="Enter Description" class=" form-control" required="">
+                        <input id="description" name="description" type="text" placeholder="Enter Description" class=" form-control" required>
 
                     </div>
                 </div>

@@ -119,20 +119,20 @@ ini_set('display_errors', 1);
                 <div class="control-group">
                     <label class="control-label" for="date">Date: </label>
                    
-                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required="">
+                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required>
 
                    
                 </div>
 
                         <p>
                         Time :
-                        <input id="time" name="time" type="time" placeholder="Enter time: " class=" form-control" value = "hh:mm:ss" required="">
+                        <input id="time" name="time" type="time" placeholder="Enter time: " class=" form-control" value = "hh:mm:ss" required>
                         </p>
                
                 <div class="control-group">
                     <label class="control-label" for="reason">Reason</label>
                     <div class="controls">
-                        <input id="reason" name="reason" type="text" placeholder="Enter Reason" class=" form-control" required="">
+                        <input id="reason" name="reason" type="text" placeholder="Enter Reason" class=" form-control" required>
 
                     </div>
                 </div>
