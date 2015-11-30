@@ -25,7 +25,7 @@ if(isset($_POST['submit'])) {
     $phone = filter_input(INPUT_POST, "phone");
     $consultation = filter_input(INPUT_POST, "consultation");
     $salary = filter_input(INPUT_POST, "salary");
-    $dept = 1;
+    $dept = filter_input(INPUT_POST, "department");
     $id = NULL;
     $password = filter_input(INPUT_POST, "email");
 
@@ -68,6 +68,31 @@ if(isset($_POST['submit'])) {
 
                     </div>
                 </div>
+
+                <?php
+                include('connection.php');
+                print "<div class=\"control-group\">
+                    <label class=\"control-label\" for=\"department\">Department</label>
+                    <div class=\"controls\">
+                        <select id=\"department\" name=\"department\" class=\" form-control\" required>";
+
+                $deptfetch = "select * from department";
+
+                $ps = $con->prepare($deptfetch);
+
+                // Fetch the matching row.
+                $ps->execute();
+                $data = $ps->fetchAll();
+
+                foreach ($data as $row) {
+                    print "<option value = '".$row['dept_id']."'>".$row['dept_name']."</option>";
+                }
+                print "</select>
+
+                    </div>
+                </div>";
+
+                ?>
 
                 <div class="control-group">
                     <label class="control-label" for="email">Email</label>
