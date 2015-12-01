@@ -10,8 +10,8 @@
         include('adminCommon.html');
         print '<BR><BR>';
         ini_set('display_errors', 1);
-        #$d_id = filter_input(INPUT_GET, "did");
-        $d_id=2;
+        $d_id = filter_input(INPUT_GET, "did");
+        #$d_id=2;
         #Full texts   d_id  d_d_name  d_phone   dept_id   doctor_fees   emailid   password  salary Address
         class doctor_list
         {
@@ -44,6 +44,11 @@
         {
         include('connection.php');
         print "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
+        print "Profile Pic:";
+        header("Content-Type : image/jpeg");
+        #echo $a['mime'];
+
+        echo '<img src="data:image/jpeg;base64,'.base64_encode(  $h->getprofilepic() ).'"/>';
         print "<p>Id: <input name='id' readonly='readonly' value='".$h->getd_id(). "'      size=15 readonly/></p>"; 
         print "                                                      <tr>\n";
         print "<p>Name: <input name='name' value='".$h->getd_name(). "'      size=15/></p> "; 
@@ -69,10 +74,7 @@
         print "<p>Password: <input name='password' value='".$h->getpassword(). "'      size=15/></p>"; 
         print "<p>Salary: <input name='salary' value='".$h->getsalary(). "'      size=15/></p>"; 
         print "<p>Doctor Fees: <input name='doctor_fees' value='".$h->getdoctor_fees(). "'      size=15/></p>"; 
-        header("Content-Type : image/jpeg");
-        #echo $a['mime'];
-
-        echo '<img src="data:image/jpeg;base64,'.base64_encode(  $h->getprofilepic() ).'"/>';
+        
         print "<BR>Select image to upload:";
         print " <input type='file' name='fileToUpload' id='fileToUpload'>";
         print "<p><input type=submit value='Update' name='submit'/></p>";
@@ -151,9 +153,11 @@
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) 
-        {
+        if(is_null($imageFileType))
+            echo "Not done";
+       // $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        //if($check !== false) 
+        //{
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
         {
         $blob = fopen($target_file,'rb');
@@ -171,10 +175,19 @@
         echo "Successfully Updated";
         }
         else
-        echo "There was a problem uploading";
-       
+        {
+       include('connection.php');
+        $query = "UPDATE doctor SET d_name='$d_name',d_phone=$d_phone,dept_id=$dept_id,doctor_fees='$doctor_fees',emailid='$emailid',password='$password',salary='$salary',Address='$Address' WHERE d_id=:id";
+        # This is the sql query for delete you should write the trigger code here 
 
+        #$query = "delete from doctor  WHERE d_id=$id";
+        $ps = $con->prepare($query);
+        $ps->bindParam(':id',$id);
+       $ps->execute();
+        echo "Successfully Updated";
+       
     }
+    
 }
         }
 

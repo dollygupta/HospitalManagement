@@ -56,6 +56,8 @@ $data=$con->prepare($query);
 $data->bindParam(':did',$did);
 $data->execute();
 
+print "Doctor was deleted from the databases and all the patients with appointments under him were notified";
+
 }
 catch(PDOException $ex) {
   echo 'ERROR: '.$ex->getMessage();

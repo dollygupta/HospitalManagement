@@ -83,7 +83,7 @@ here;
     print "<td>". $d->getphone()   . "</td>";
     print "<td>". $d->getsalary()  . "</td>";
     print "<td>". $d->getfees()  . "</td>";
-    print "<td>&emsp;<a href=updatedoctor.php?did=$did><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletedoctor.php?did=$did><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+    print "<td>&emsp;<a href=doctor_update.php?did=$did><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=doctor_delete.php?did=$did><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
     print "</tr>";
 
 }

@@ -49,7 +49,7 @@ function createtablerow(doctor_list $h,& $header)
     <th>Doctor Id</th>
     <th>Address</th>
     <th>Full d_name</th>
-    <th>Dept_Id</th>
+    <th>Deptartment Name</th>
     <th>Phone</th>
     <th>emailid Address</th>
     <th>Password</th>
@@ -65,7 +65,20 @@ here;
   print "<td>". $h->getd_id() . "</td>";
   print "<td>". $h->getAddress() . "</td>";
   print "<td>". $h->getd_name() . "</td>";
-  print "<td>". $h->getdept_Id() . "</td>";
+   include('connection.php');
+
+    $deptfetch = "select * from department where dept_id = :dept_id";
+
+    $ps = $con->prepare($deptfetch);
+    $ps->bindParam(":dept_id",$h->getdept_id());
+
+    // Fetch the matching row.
+    $ps->execute();
+    $data = $ps->fetchAll();
+
+    foreach ($data as $row) {
+        print "<td>".$row['dept_name']."</td>";
+    }
     print "<td>". $h->getd_phone() . "</td>";
   print "<td>". $h->getemailid() . "</td>";
    print "<td>". $h->getpassword() . "</td>";
