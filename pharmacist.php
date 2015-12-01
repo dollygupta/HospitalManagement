@@ -1,6 +1,9 @@
+<?php
+include('pharmacommon.html');
+
+?>
 <html>
 <body>
-
 <fieldset>
 <legend>Medicine Details</legend>
 <form  action="" method="post">
@@ -25,11 +28,14 @@ Date:
 <input type="text" name="date" />
 </p>
 <p>
+Quantity:
+<input type="text" name="qty" />
+</p>
+<p>
 <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Save">
 </p>
 </form>
 <?php
-
 if (isset($_POST['Submit1']))
 {
  			$name = filter_input(INPUT_POST, "name");
@@ -37,16 +43,16 @@ if (isset($_POST['Submit1']))
             $type = filter_input(INPUT_POST, "type");
             $supid = filter_input(INPUT_POST, "supid");
             $date = filter_input(INPUT_POST, "date");
-            
+            $qty= filter_input(INPUT_POST, "qty");
             try {
 
                 // Connect to the database.
                 include('connection.php');
 
-                $query = "INSERT INTO medicine VALUES (:id, :name, :type, :supid, :date)";
+                $query = "INSERT INTO medicine VALUES (:id, :name, :type, :supid, :date, :qty)";
 
                 $ps = $con->prepare($query);
-                $ps->execute(array(':id' => $medid, ':name' => $name, ':type' => $type, ':supid' => $supid, ':date' => $date));
+                $ps->execute(array(':id' => $medid, ':name' => $name, ':type' => $type, ':supid' => $supid, ':date' => $date, ':qty' => $qty));
 
                 // echo $name, $email, $address, $gender, $dob, $weight, $id, $password;
                 print "<div style=\"text-align: center;\"><h3>$name was Successfully Inserted</h3></div>\n";
@@ -106,7 +112,7 @@ if(isset($_POST["Refresh"]))
     // output data of each row
     while($row = $ps->fetch()) {
     	echo "<table border = '1'>";
-        echo "<tr><td> id: " . $row["medid"]. "</td><td> Name: " . $row["medname"]. "</td><td>Type: " . $row["medtype"]. "</td><td> SupplierId: " . $row["supid"] . "</td><td>Ordered date: " . $row["date"] .  "</td></tr>";
+        echo "<tr><td> id: " . $row["medid"]. "</td><td> Name: " . $row["medname"]. "</td><td>Type: " . $row["medtype"]. "</td><td> SupplierId: " . $row["supid"] . "</td><td>Ordered date: " . $row["date"] .  "</td><td> Stock: " . $row["stock"] .  "</td></tr>";
         echo "</table>";
     }
 	} 

@@ -29,8 +29,8 @@
         function constructTable($data)
         {
             // We're going to construct an HTML table.
-            print "    <table border='1'>\n";
-                 print "        <tr>\n";
+                print "    <table border='1'>\n";
+                print "        <tr>          \n";
                 print "            <th>REPORT ID</th>\n";
                 print "            <th>DATE</th>\n";
                 print "            <th>PATIENT ID</th>\n";
