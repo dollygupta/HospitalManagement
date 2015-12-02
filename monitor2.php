@@ -83,4 +83,4 @@ function sendAjax(dept_name,room_type,duration){
     xttp.send();
 }
 </script>
-<?include('footer.html');?>
+<?php include('footer.html');?>

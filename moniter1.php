@@ -83,4 +83,4 @@ function sendAjax(d_name,test_name,duration){
     xttp.send();
 }
 </script>
-<?include('footer.html');?>
+<?php include('footer.html');?>

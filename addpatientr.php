@@ -1,4 +1,4 @@
-<?include('receptionistCommon.html');?>
+<?php include('receptionistCommon.html');?>
     <div class="content">
         <div class="page-header">
             <h2>Manage Patient</h2>
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
         // Connect to the database.
         include('connection.php');
 
-        $query = "INSERT INTO patient (p_name, p_email, p_address, p_gender, p_dob, p_weight, p_id, p_password)
+        $query = "INSERT INTO patient (p_name, emailid, p_address, p_gender, p_dob, p_weight, p_id, password)
               VALUES (:name, :email, :address, :gender, :dob, :weight, :id, :password)";
 
         $ps = $con->prepare($query);
@@ -132,4 +132,4 @@ if(isset($_POST['submit'])) {
 
         </div>
     </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

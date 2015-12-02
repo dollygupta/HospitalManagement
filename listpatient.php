@@ -22,7 +22,7 @@ class patient
     private $p_dob;
     private $p_id;
     private $p_name;
-    private $p_email;
+    private $emailid;
     private $p_weight;
     private $p_address;
     private $p_gender;
@@ -30,7 +30,7 @@ class patient
     public function getdob() {return $this->p_dob; }
     public function getid() {return $this->p_id; }
     public function getname() {return $this->p_name; }
-    public function getemail() {return $this->p_email; }
+    public function getemail() {return $this->emailid; }
     public function getweight() {return $this->p_weight; }
     public function getaddress() {return $this->p_address;}
     public function getgender() {return $this->p_gender;}
@@ -116,4 +116,4 @@ catch(Exception $ex) {
 ?>
     </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

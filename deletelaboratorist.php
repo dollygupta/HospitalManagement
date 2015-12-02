@@ -71,4 +71,4 @@ if(isset($_POST['buttondec'])) {
 
 </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

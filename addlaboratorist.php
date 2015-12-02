@@ -98,4 +98,4 @@ if(isset($_POST['submit'])) {
 
     </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>
