@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Manage Receptionist</h2>
