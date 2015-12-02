@@ -53,7 +53,6 @@ if(isset($_POST["submit"]))
                 print "            <th>time</th>\n";
                 print "            <th>date</th>\n";
                 print "            <th>Day Of the Week</th>\n";
-                print "<th> Want to Cancel? </th> ";
                 print "        </tr>\n";
            // Construct the HTML table row by row.
             $doHeader = true;
@@ -62,7 +61,6 @@ if(isset($_POST["submit"]))
                 foreach ($row as $name => $value) {
                     print "            <td>$value</td>\n";
                 }
-                print "<td> Delete comes here!</td>";
                 print "        </tr>\n";
             }
             

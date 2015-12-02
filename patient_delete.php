@@ -15,21 +15,17 @@ class patientmessage
   
 }
 
-$did= filter_input(INPUT_GET, "did");
+$pid= filter_input(INPUT_GET, "pid");
 try{
 include('connection.php');
 
-$query= "call send_message8(:did)";
+
+$query = "delete from patient where p_id=:pid";
 $data=$con->prepare($query);
-$data->bindParam(':did',$did);
+$data->bindParam(':pid',$pid);
 $data->execute();
 
-$query = "delete from doctor where d_id=:did";
-$data=$con->prepare($query);
-$data->bindParam(':did',$did);
-$data->execute();
-
-print "Doctor was deleted from the databases and all the patients with appointments under him were notified";
+print "Patient was deleted from the database and if he was an inpatient his room status was updated!";
 
 }
 catch(PDOException $ex) {

@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Manage Patient</h2>
@@ -65,7 +65,7 @@ here;
     print "<td>". $p->getgender()  . "</td>";
     print "<td>". $p->getdob()     . "</td>";
     print "<td>". $p->getweight()  . "</td>";
-    print "<td>&emsp;<a href=updatepatient.php?pid=$pid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepatient.php?pid=$pid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+     print "<td><a href=#><img src='update.jpeg'  /></a><a href=patient_delete.php?pid=$pid><img src = 'delete.jpeg'  /></a></td>" ;
     print "</tr>";
 
 }
