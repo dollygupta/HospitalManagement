@@ -1,4 +1,4 @@
-<?include('receptionistCommon.html');?>
+<?php include('receptionistCommon.html');?>
     <div class="content">
         <div class="page-header">
             <h2>Manage Patient</h2>
@@ -116,4 +116,4 @@ catch(Exception $ex) {
 ?>
         </div>
     </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

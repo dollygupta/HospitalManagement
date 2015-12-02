@@ -142,7 +142,7 @@
         </body>
         </html>
 =======
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
     <div class="content">
         <div class="page-header">
             <h2>Manage Doctor</h2>
@@ -291,5 +291,5 @@ if(isset($_POST['submit'])) {
 
         </div>
     </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>
 >>>>>>> 9661c9af9013c5c5d11cb2311bf321f7fb9a26c6

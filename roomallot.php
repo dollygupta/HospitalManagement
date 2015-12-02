@@ -235,4 +235,4 @@ if ( IsSet( $_POST["my_option"] ) ) // IF USER SELECTED ANY OPTION.
 
     </div>
 
-<?include('footer.html');?>
+<?php include('footer.html');?>
