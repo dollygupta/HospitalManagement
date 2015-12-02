@@ -15,7 +15,6 @@ function sendAjaxData(pwd,email,user_type){
 	xttp.onreadystatechange = function() { 
 	if (xttp.readyState == XMLHttpRequest.DONE && xttp.status == 200) {
 	var result=xttp.responseText.trim();
-	alert(result);
 	if(result == "wrong"){
 		document.getElementById("error").innerHTML="wrong credential entered!";
 
