@@ -59,7 +59,7 @@ $(document).ready(function(){
                         try
                         {
                             include('connection.php');
-
+                             session_start();
                             $query = "select * from doctor";
                         if(!(is_null($_POST["did"])))
                             {
@@ -98,13 +98,6 @@ $(document).ready(function(){
 
             </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="date">Date: </label>
-                   
-                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required>
-
-
-            <div >
                 <label class="control-label" for="submit"></label>
                 <div >
                     <button id="submit" name="search" class="btn btn-primary">Search Appointment</button>
@@ -114,16 +107,16 @@ $(document).ready(function(){
 
         
         <form action="" method="post">
-             <label class="control-label" for="Time">Time</label>
+             <label class="control-label" for="Time">Time slots Available: </label>
                 
-                    <select name="time">
+                    
                         <?php
-                        session_start();
+                       
                         try
                         {  
                             if(isset($_POST["search"]))
                             {
-
+                               print "<select name='time'>";
                                 include('connection.php');
                                 $did=filter_input(INPUT_POST,"did");
                                 $date=filter_input(INPUT_POST,"date");
@@ -139,27 +132,23 @@ $(document).ready(function(){
                                 {
                                     print "<option value = '".$row['time']."'>".$row['time']."</option>";
                                 }
+                                 print "</select>";
+                                 print "<br />";
+                                 print  "Date of Appointment: ";
+                                print "<input type='text' value=$date readonly />";
 
                             }
                         }
                         catch(Exception $ex)   {
                             echo $ex->getMessage();
                         }
-                        print "</select>";
+                       
 
 
                         ?>
                   
-                  
-                     <div class="control-group">
-=======
-                        <p>
-                        Time :
-                        <input id="time" name="time" type="time" placeholder="Enter time: " class=" form-control" value = "hh:mm:ss" required>
-                        </p>
                
                 <div class="control-group">
->>>>>>> 9661c9af9013c5c5d11cb2311bf321f7fb9a26c6
                     <label class="control-label" for="reason">Reason</label>
                     <div class="controls">
                         <input id="reason" name="reason" type="text" placeholder="Enter Reason" class=" form-control" required>

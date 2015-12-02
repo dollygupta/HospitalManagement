@@ -50,6 +50,8 @@ $(document).ready(function(){
 
 <?php
 ini_set('display_errors', 1);
+session_start();
+                   $id=$_SESSION["did"];
 
 if(isset($_POST['submit'])) {
     $pid = filter_input(INPUT_POST, "pid");
@@ -84,23 +86,9 @@ if(isset($_POST['submit'])) {
 
 ?>
         <form action="" method="post" class="form-horizontal">
-
-
-                <div class="control-group">
-                    <label class="control-label" for="pid">Pid: </label>
-                    <div class="controls">
-                        <input id="pid" name="pid" type="text" class=" form-control" required>
-
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="date">Date of admission: </label>
-                   
-                        <input name="date" type="date" placeholder="Enter date: " value="yyyy-mm-dd" required>
-
-
+<p>
                Select a room type
-    <br/>
+   
     <select id="my_select" onchange="send_option();">
       <option>Select an option</option>
 <?php
@@ -134,9 +122,8 @@ ini_set('display_errors', 1);
 //----------------------------------------------------------------
 ?>
     
-    <br/> 
-    <br/>
-    <table>
+</p>
+    <p>
         RoomNo:
       <select name = "roomno">
 
@@ -171,17 +158,16 @@ if ( IsSet( $_POST["my_option"] ) ) // IF USER SELECTED ANY OPTION.
 //----------------------------------------------------------------
 ?>
 </select>
-    </table>
+</p>
 
 <!-- FORM TO SEND THE SELECTED OPTION. -->
   
    <div class="control-group">
                     <label class="control-label" for="pid">Patient Name: </label>
                    <?php
-                   session_start();
-                   $id=$_SESSION["did"];
+                  
                    include('connection.php');
-                 
+                 //A doctor can make appointments to all the patients who are under him.
         print "<p><td> <select name='pid'>   ";
         $query = "select a.p_id AS pid,p.p_name AS pname from appointment a,patient p where  a.p_id=p.p_id and d_id=:id";
        $ps = $con->prepare($query);

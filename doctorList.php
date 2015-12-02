@@ -48,13 +48,13 @@ function createtablerow(doctor_list $h,& $header)
     <tr> 
     <th>Doctor Id</th>
     <th>Address</th>
-    <th>Full d_name</th>
-    <th>Deptartment Name</th>
+    <th>Full Name</th>
+    <th>Department Name</th>
     <th>Phone</th>
-    <th>emailid Address</th>
+    <th>Email id </th>
     <th>Password</th>
-    <th>salary</th>
-    <th>Doctor Fees</th>
+    <th>Salary</th>
+    <th>Consultation Fees</th>
     <th>Option</th>
     </tr>
 here;
