@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
    <div class="page-header">
       <h2>Manage Pharmacist</h2>
@@ -109,4 +109,4 @@ catch(Exception $ex) {
 ?>
 </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

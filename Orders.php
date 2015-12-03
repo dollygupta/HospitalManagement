@@ -86,7 +86,7 @@ if ( IsSet( $_POST["my_option"] ) ) // IF USER SELECTED ANY OPTION.
             }
            print "<p>Patient ID:<input type='text' value='' name='pid' /></p>";
            print "<p>Quantity: <input type='text' value='' name='qty' /></p>";
-            print "<p>Transaction ID:<input type='text' value='' name='tid' /></p>";
+           
            print "<input type='submit' value='Calculate' name='calculate' />";
             print "</form>";
         }
@@ -114,7 +114,7 @@ if ( IsSet( $_POST["calculate"] ) ) // IF USER SELECTED ANY OPTION.
    $pid=filter_input(INPUT_POST,"pid");
    $price=filter_input(INPUT_POST, "price");
    $qty=filter_input(INPUT_POST,"qty");
-   $tid=filter_input(INPUT_POST, "tid");
+  // $tid=filter_input(INPUT_POST, "tid");
    $medname=filter_input(INPUT_POST, "medname");
 
 $query="select stock from medicine where medname='$medname'";
@@ -132,7 +132,7 @@ $query="select stock from medicine where medname='$medname'";
 
             else
 {
-   $query="INSERT into medcinebill VALUES($tid,$pid,now(),$price*$qty)";
+   $query="INSERT into medcinebill(P_ID,DATE,AMOUNT) VALUES($pid,now(),$price*$qty)";
      $ps = $con->prepare($query);
 
             // Fetch the matching row.

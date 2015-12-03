@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Manage Patient</h2>
@@ -22,7 +22,7 @@ class patient
     private $p_dob;
     private $p_id;
     private $p_name;
-    private $p_email;
+    private $emailid;
     private $p_weight;
     private $p_address;
     private $p_gender;
@@ -30,7 +30,7 @@ class patient
     public function getdob() {return $this->p_dob; }
     public function getid() {return $this->p_id; }
     public function getname() {return $this->p_name; }
-    public function getemail() {return $this->p_email; }
+    public function getemail() {return $this->emailid; }
     public function getweight() {return $this->p_weight; }
     public function getaddress() {return $this->p_address;}
     public function getgender() {return $this->p_gender;}
@@ -65,7 +65,7 @@ here;
     print "<td>". $p->getgender()  . "</td>";
     print "<td>". $p->getdob()     . "</td>";
     print "<td>". $p->getweight()  . "</td>";
-    print "<td>&emsp;<a href=updatepatient.php?pid=$pid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepatient.php?pid=$pid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
+     print "<td><a href=#><img src='update.jpeg'  /></a><a href=patient_delete.php?pid=$pid><img src = 'delete.jpeg'  /></a></td>" ;
     print "</tr>";
 
 }
@@ -116,4 +116,4 @@ catch(Exception $ex) {
 ?>
     </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

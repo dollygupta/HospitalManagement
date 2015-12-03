@@ -76,7 +76,7 @@ if(isset($_POST['submit'])) {
         $ps1->execute(array(':roomno' => $roomno));
 
         // echo $name, $email, $address, $salary, $id, $emptype, $password;
-        print "<div style=\"text-align: center;\"><h3>Room is Allotted</h3></div>\n";
+        print "<div style=\"text-align: center;\"><h3>Room is Allotted and status is updated!</h3></div>\n";
     } catch (PDOException $ex) {
         echo 'ERROR: ' . $ex->getMessage();
     } catch (Exception $ex) {
@@ -235,4 +235,4 @@ if ( IsSet( $_POST["my_option"] ) ) // IF USER SELECTED ANY OPTION.
 
     </div>
 
-<?include('footer.html');?>
+<?php include('footer.html');?>

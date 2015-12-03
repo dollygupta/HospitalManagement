@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Manage Pharmacist</h2>
@@ -102,4 +102,4 @@ ini_set('display_errors', 1);
 
     </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

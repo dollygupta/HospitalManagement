@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Manage Nurse</h2>
@@ -54,7 +54,7 @@ ini_set('display_errors', 1);
  * Time: 6:51 PM
  */
         ?>
-        <form action="labtestresult.php" method="post" class="form-horizontal">
+        <form action="" method="post" class="form-horizontal">
 
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
@@ -99,4 +99,4 @@ ini_set('display_errors', 1);
 
     </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

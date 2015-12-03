@@ -1,4 +1,4 @@
-<?include('adminCommon.html');?>
+<?php include('adminCommon.html');?>
 <div class="content">
     <div class="page-header">
         <h2>Monitor Hospital</h2>
@@ -83,4 +83,4 @@ function sendAjax(d_name,test_name,duration){
     xttp.send();
 }
 </script>
-<?include('footer.html');?>
+<?php include('footer.html');?>

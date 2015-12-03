@@ -136,4 +136,4 @@ catch(Exception $ex) {
 ?>
 </div>
 </div>
-<?include('footer.html');?>
+<?php include('footer.html');?>

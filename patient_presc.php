@@ -1,64 +1,71 @@
-<?php include('adminCommon.html');?>
+<?php include('patientCommon.html');?>
 <div class="content">
     <div class="page-header">
-        <h2>Manage Pharmacist</h2>
+        <h2> patient prescription</h2>
     </div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="listpharmacist.php">Pharmacist List</a></li>
-                    <li><a href="addpharmacist.php">Add Pharmacist</a></li>
-                </ul>
+                
             </div>
         </div>
     </nav>
     <div class="show-table">
         <?php
+
+
+class employee
+{
+    private $date;
+    private $prescription;
+    private $d_name;
+    
+
+    public function getdate() {return $this->date; }
+    public function getpres() {return $this->prescription; }
+    public function getd_name() {return $this->d_name; }
+    
+}
+
 ini_set('display_errors', 1);
 
-include('classemployee.php');
 
         function createtablerow(employee $e,& $header)
         {
             if($header)
             {
-                print "<table class='table table-bordered'>";
+                print "<table class='table table-bordered' border='1'>";
                 print <<<here
     <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Street Address</th>
-    <th>Email Address</th>
-    <th>Salary</th>
-    <th>Options</th>
+    <th>Doctor Name</th>
+    <th>Date</th>
+    <th>Prescription</th>
     </tr>
 here;
                 $header=false;
             }
-            $eid=$e->gete_id();
             print "<tr>";
-            print "<td>". $e->gete_id()    . "</td>";
-            print "<td>". $e->gete_name()  . "</td>";
-            print "<td>". $e->getaddress() . "</td>";
-            print "<td>". $e->getemail()   . "</td>";
-            print "<td>". $e->getsalary()  . "</td>";
-            print "<td>&emsp;<a href=updatepharmacist.php?eid=$eid><span class=\"glyphicon glyphicon-edit\" ></span></a>&emsp;<a href=deletepharmacist.php?eid=$eid><span class=\"glyphicon glyphicon-remove\" ></span></a></td>" ;
-            print "</tr>";
+           
+            print "<td>". $e->getd_name()  . "</td>";
+            print "<td>". $e->getdate() . "</td>";
+            print "<td>". $e->getpres()   . "</td>";
+           print "</tr>";
 
         }
 
 try
 {
     $header=true;
-
+    session_start();
+    $id=$_SESSION["id"];
     // Connect to the database.
     include('connection.php');
 
-    $query = "SELECT * FROM employee e where e.type='Pharmacist';";
+    $query = "SELECT c.date,c.prescription,d.d_name from checkup_details c,doctor d where c.d_id=d.d_id and c.p_id=:pid;";
 
     $ps = $con->prepare($query);
-
+    $ps->bindParam(":pid",$id);
     // Fetch the matching row.
     $ps->execute();
     $ps->setFetchMode(PDO::FETCH_CLASS, "employee");
@@ -94,4 +101,4 @@ catch(Exception $ex) {
 ?>
     </div>
 </div>
-<?php include('footer.html');?>
+<?include('footer.html');?>
