@@ -9,7 +9,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="moniter1.php">Lab Test</a></li>
                     <li class=""><a href="monitor2.php">Rooms</a></li>
-                     <li class=""><a href="">Drugs</a></li>
+                     <li class=""><a href="monitor3.php">Drugs</a></li>
 
                 </ul>
             </div>
